@@ -1,5 +1,6 @@
 (ns nedap.utils.spec.predicates
   (:require
+   [clojure.string :as string]
    [nedap.speced.def :as speced]
    [nedap.utils.spec.predicates.impl :as impl]
    [spec-coerce.core :as spec-coerce]))
@@ -34,6 +35,12 @@
   (or (string? x)
       (symbol? x)
       (keyword? x)))
+
+(speced/defn ^boolean? present-string?
+  "Is `x` a string, and not a `clojure.string/blank?` one?"
+  [x]
+  (and (string? x)
+       (not (string/blank? x))))
 
 (def neg-integer-coercer (impl/coercer neg-integer?))
 
