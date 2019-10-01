@@ -19,6 +19,10 @@
                              :username :env/artifactory_user
                              :password :env/artifactory_pass}}
 
+  :deploy-repositories {"clojars" {:url      "https://clojars.org/repo"
+                                   :username :env/clojars_user
+                                   :password :env/clojars_pass}}
+
   :repository-auth {#"https://nedap.jfrog\.io/nedap/staffing-solutions/"
                     {:username :env/artifactory_user
                      :password :env/artifactory_pass}}
