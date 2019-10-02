@@ -2,8 +2,7 @@
   (:require
    #?(:clj [clojure.spec.alpha :as spec] :cljs [cljs.spec.alpha :as spec])
    #?(:clj [clojure.test :refer [deftest testing are is use-fixtures]] :cljs [cljs.test :refer-macros [deftest testing is are] :refer [use-fixtures]])
-   [nedap.utils.spec.predicates :as sut]
-   [spec-coerce.core :as spec-coerce]))
+   [nedap.utils.spec.predicates :as sut]))
 
 (deftest present-string?
   (are [input expected] (= expected
