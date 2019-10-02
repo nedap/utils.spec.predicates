@@ -4,62 +4,26 @@
    #?(:clj [clojure.test :refer [deftest testing are is use-fixtures]] :cljs [cljs.test :refer-macros [deftest testing is are] :refer [use-fixtures]])
    [nedap.utils.spec.predicates.range :as sut]))
 
-(deftest long?
+(deftest long
   #?(:clj
-     (are [x expected] (= expected
-                          (sut/long? x))
-       (Integer. 1)                      true
-       (Long. 1)                         true
-       (clojure.lang.BigInt/fromLong 1)  true
-       (BigInteger/valueOf 1)            true
-       (Short. "1")                      true
-       (Long. 1)                         true
-       (Double. 1.1)                     true
-       (Float. 1.1)                      true
-       (Long. -1)                        true
-       (Double. -1.1)                    true
-       (Float. -1.1)                     true
-       Long/MIN_VALUE                    true
-       Long/MAX_VALUE                    true
-       (inc (bigint Long/MAX_VALUE))     false
-       (dec (bigint Long/MIN_VALUE))     false)))
-
-(deftest pos-long?
-  #?(:clj
-     (are [x expected] (= expected
-                          (sut/pos-long? x))
-       (Integer. 1)                      true
-       (Long. 1)                         true
-       (clojure.lang.BigInt/fromLong 1)  true
-       (BigInteger/valueOf 1)            true
-       (Short. "1")                      true
-       (Long. 1)                         true
-       (Double. 1.1)                     true
-       (Float. 1.1)                      true
-       (Long. -1)                        false
-       (Double. -1.1)                    false
-       (Float. -1.1)                     false
-       Long/MAX_VALUE                    true
-       Long/MIN_VALUE                    false
-       (inc (bigint Long/MAX_VALUE))     false
-       (dec (bigint Long/MIN_VALUE))     false)))
-
-(deftest neg-long?
-  #?(:clj
-     (are [x expected] (= expected
-                          (sut/neg-long? x))
-       (Integer. 1)                      false
-       (Long. 1)                         false
-       (clojure.lang.BigInt/fromLong 1)  false
-       (BigInteger/valueOf 1)            false
-       (Short. "1")                      false
-       (Long. 1)                         false
-       (Double. 1.1)                     false
-       (Float. 1.1)                      false
-       (Long. -1)                        true
-       (Double. -1.1)                    true
-       (Float. -1.1)                     true
-       Long/MAX_VALUE                    false
-       Long/MIN_VALUE                    true
-       (inc (bigint Long/MAX_VALUE))     false
-       (dec (bigint Long/MIN_VALUE))     false)))
+     (are [v
+           f ef
+           g eg
+           h eh] (do (is (= ef (f v)))
+                     (is (= eg (g v)))
+                     (is (= eh (h v))))
+        (Integer. 1)                      sut/long? true  sut/pos-long? true  sut/neg-long? false
+        (Long. 1)                         sut/long? true  sut/pos-long? true  sut/neg-long? false
+        (clojure.lang.BigInt/fromLong 1)  sut/long? true  sut/pos-long? true  sut/neg-long? false
+        (BigInteger/valueOf 1)            sut/long? true  sut/pos-long? true  sut/neg-long? false
+        (Short. "1")                      sut/long? true  sut/pos-long? true  sut/neg-long? false
+        (Long. 1)                         sut/long? true  sut/pos-long? true  sut/neg-long? false
+        (Double. 1.1)                     sut/long? true  sut/pos-long? true  sut/neg-long? false
+        (Float. 1.1)                      sut/long? true  sut/pos-long? true  sut/neg-long? false
+        (Long. -1)                        sut/long? true  sut/pos-long? false sut/neg-long? true
+        (Double. -1.1)                    sut/long? true  sut/pos-long? false sut/neg-long? true
+        (Float. -1.1)                     sut/long? true  sut/pos-long? false sut/neg-long? true
+        Long/MIN_VALUE                    sut/long? true  sut/pos-long? false sut/neg-long? true
+        Long/MAX_VALUE                    sut/long? true  sut/pos-long? true  sut/neg-long? false
+        (inc (bigint Long/MAX_VALUE))     sut/long? false sut/pos-long? false sut/neg-long? false
+        (dec (bigint Long/MIN_VALUE))     sut/long? false sut/pos-long? false sut/neg-long? false)))
