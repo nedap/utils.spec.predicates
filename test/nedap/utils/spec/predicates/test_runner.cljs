@@ -5,7 +5,7 @@
    [unit.nedap.utils.spec.predicates]
    [unit.nedap.utils.spec.predicates.present-named]
    [unit.nedap.utils.spec.predicates.present-string]
-   [unit.nedap.utils.spec.predicates.range]))
+   [unit.nedap.utils.spec.predicates.ranges]))
 
 (nodejs/enable-util-print!)
 
@@ -14,6 +14,6 @@
    'unit.nedap.utils.spec.predicates
    'unit.nedap.utils.spec.predicates.present-named
    'unit.nedap.utils.spec.predicates.present-string
-   'unit.nedap.utils.spec.predicates.range))
+   'unit.nedap.utils.spec.predicates.ranges))
 
 (set! *main-cli-fn* -main)
