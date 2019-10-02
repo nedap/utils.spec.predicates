@@ -27,4 +27,4 @@
 
   Works for any numeric type"
   [^number? x]
-  (<= min-long-value x 0))
+  (<= min-long-value x -1))

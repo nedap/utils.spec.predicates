@@ -23,6 +23,7 @@
         (Long. -1)                        sut/long? true  sut/pos-long? false sut/neg-long? true
         (Double. -1.1)                    sut/long? true  sut/pos-long? false sut/neg-long? true
         (Float. -1.1)                     sut/long? true  sut/pos-long? false sut/neg-long? true
+        0                                 sut/long? true  sut/pos-long? false sut/neg-long? false
         Long/MIN_VALUE                    sut/long? true  sut/pos-long? false sut/neg-long? true
         Long/MAX_VALUE                    sut/long? true  sut/pos-long? true  sut/neg-long? false
         (inc (bigint Long/MAX_VALUE))     sut/long? false sut/pos-long? false sut/neg-long? false
