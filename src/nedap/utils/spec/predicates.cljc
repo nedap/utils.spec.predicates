@@ -42,6 +42,12 @@
   (and (string? x)
        (not (string/blank? x))))
 
+(speced/defn ^boolean? present-named?
+  "Is `x` a `#'named?` with a `#'present-string?` as its name"
+  [x]
+  (and (named? x)
+       (present-string? (name x))))
+
 (def neg-integer-coercer (impl/coercer neg-integer?))
 
 (def nat-integer-coercer (impl/coercer nat-integer?))
