@@ -2,10 +2,10 @@
   (:require
    [nedap.speced.def :as speced]))
 
-(def max-long-value ;; unavailable in cljs
+(def ^:private max-long-value ;; unavailable in cljs
   9223372036854775807N)
 
-(def min-long-value ;; unavailable in cljs
+(def ^:private min-long-value ;; unavailable in cljs
   -9223372036854775808N)
 
 (speced/defn ^boolean? long?
