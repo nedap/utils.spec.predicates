@@ -5,40 +5,24 @@
    [nedap.utils.spec.predicates.ranges :as sut]))
 
 (deftest long-predicates
-  #?(:clj
-     (are [v expected] (= (vals expected)
-                          ((apply juxt (keys expected)) v))
-        (Integer. 1)                     {sut/long? true  sut/nat-long? true  sut/pos-long? true  sut/neg-long? false}
-        (Long. 1)                        {sut/long? true  sut/nat-long? true  sut/pos-long? true  sut/neg-long? false}
-        (clojure.lang.BigInt/fromLong 1) {sut/long? true  sut/nat-long? true  sut/pos-long? true  sut/neg-long? false}
-        (BigInteger/valueOf 1)           {sut/long? true  sut/nat-long? true  sut/pos-long? true  sut/neg-long? false}
-        (Short. "1")                     {sut/long? true  sut/nat-long? true  sut/pos-long? true  sut/neg-long? false}
-        (Long. 1)                        {sut/long? true  sut/nat-long? true  sut/pos-long? true  sut/neg-long? false}
-        (Double. 1.1)                    {sut/long? true  sut/nat-long? false sut/pos-long? true  sut/neg-long? false}
-        (Float. 1.1)                     {sut/long? true  sut/nat-long? false sut/pos-long? true  sut/neg-long? false}
-        (Long. -1)                       {sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? true}
-        (Double. -1.1)                   {sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? true}
-        (Float. -1.1)                    {sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? true}
-        (Float. 0.0)                     {sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? false}
-        0                                {sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? false}
-        Long/MIN_VALUE                   {sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? true}
-        Long/MAX_VALUE                   {sut/long? true  sut/nat-long? true  sut/pos-long? true  sut/neg-long? false}
-        (inc (bigint Long/MAX_VALUE))    {sut/long? false sut/nat-long? false sut/pos-long? false sut/neg-long? false}
-        (dec (bigint Long/MIN_VALUE))    {sut/long? false sut/nat-long? false sut/pos-long? false sut/neg-long? false})
-
-     :cljs
-     (are [v expected] (= (vals expected)
-                          ((apply juxt (keys expected)) v))
-          0                       {sut/long? true sut/nat-long? false sut/pos-long? false sut/neg-long? false}
-          (long 1N)               {sut/long? true sut/nat-long? true  sut/pos-long? true  sut/neg-long? false}
-          (double 1.1)            {sut/long? true sut/nat-long? false sut/pos-long? true  sut/neg-long? false}
-          (float 1.1)             {sut/long? true sut/nat-long? false sut/pos-long? true  sut/neg-long? false}
-          (int 1)                 {sut/long? true sut/nat-long? true  sut/pos-long? true  sut/neg-long? false}
-          (long -1N)              {sut/long? true sut/nat-long? false sut/pos-long? false sut/neg-long? true}
-          (double -1.1)           {sut/long? true sut/nat-long? false sut/pos-long? false sut/neg-long? true}
-          (float -1.1)            {sut/long? true sut/nat-long? false sut/pos-long? false sut/neg-long? true}
-          (int -1)                {sut/long? true sut/nat-long? false sut/pos-long? false sut/neg-long? true}
-          Number.MIN_SAFE_INTEGER {sut/long? true sut/nat-long? false sut/pos-long? false sut/neg-long? true}
-          Number.MAX_SAFE_INTEGER {sut/long? true sut/nat-long? true  sut/pos-long? true  sut/neg-long? false}
-          -94e18                  {sut/long? false sut/nat-long? false sut/pos-long? false sut/neg-long? false}
-          94e18                   {sut/long? false sut/nat-long? false sut/pos-long? false sut/neg-long? false})))
+  (are [v expected] (= (vals expected)
+                       ((apply juxt (keys expected)) v))
+    0                                        {sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? false}
+    (long 1N)                                {sut/long? true  sut/nat-long? true  sut/pos-long? true  sut/neg-long? false}
+    (double 1.1)                             {sut/long? true  sut/nat-long? false sut/pos-long? true  sut/neg-long? false}
+    (float 1.1)                              {sut/long? true  sut/nat-long? false sut/pos-long? true  sut/neg-long? false}
+    (int 1)                                  {sut/long? true  sut/nat-long? true  sut/pos-long? true  sut/neg-long? false}
+    (long -1N)                               {sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? true}
+    (double -1.1)                            {sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? true}
+    (float -1.1)                             {sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? true}
+    (int -1)                                 {sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? true}
+    -94e18                                   {sut/long? false sut/nat-long? false sut/pos-long? false sut/neg-long? false}
+    94e18                                    {sut/long? false sut/nat-long? false sut/pos-long? false sut/neg-long? false}
+    #?@(:cljs [Number.MIN_SAFE_INTEGER       {sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? true}
+               Number.MAX_SAFE_INTEGER       {sut/long? true  sut/nat-long? true  sut/pos-long? true  sut/neg-long? false}]
+        :clj  [Long/MIN_VALUE                {sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? true}
+               Long/MAX_VALUE                {sut/long? true  sut/nat-long? true  sut/pos-long? true  sut/neg-long? false}
+               (bigint 1)                    {sut/long? true  sut/nat-long? true  sut/pos-long? true  sut/neg-long? false}
+               (bigint -1)                   {sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? true}
+               (inc (bigint Long/MAX_VALUE)) {sut/long? false sut/nat-long? false sut/pos-long? false sut/neg-long? false}
+               (dec (bigint Long/MIN_VALUE)) {sut/long? false sut/nat-long? false sut/pos-long? false sut/neg-long? false}])))
