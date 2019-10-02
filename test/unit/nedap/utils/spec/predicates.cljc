@@ -6,48 +6,43 @@
    [spec-coerce.core :as spec-coerce]))
 
 (deftest integers
-  #?(:clj (are [v
-                f ef
-                g eg
-                h eh] (do
-                        (is (= ef (f v)))
-                        (is (= eg (g v)))
-                        (is (= eh (h v))))
-            nil                               sut/neg-integer? false sut/nat-integer? false sut/pos-integer? false
-            ""                                sut/neg-integer? false sut/nat-integer? false sut/pos-integer? false
-            []                                sut/neg-integer? false sut/nat-integer? false sut/pos-integer? false
-            Double/MIN_VALUE                  sut/neg-integer? false sut/nat-integer? false sut/pos-integer? false
-            Double/MAX_VALUE                  sut/neg-integer? false sut/nat-integer? false sut/pos-integer? false
-            -1.0                              sut/neg-integer? false sut/nat-integer? false sut/pos-integer? false
-            0.0                               sut/neg-integer? false sut/nat-integer? false sut/pos-integer? false
-            1.0                               sut/neg-integer? false sut/nat-integer? false sut/pos-integer? false
+  #?(:clj (are [v expected] (= expected
+                               ((juxt sut/neg-integer? sut/nat-integer? sut/pos-integer?) v))
+            nil                               [false false false]
+            ""                                [false false false]
+            []                                [false false false]
+            Double/MIN_VALUE                  [false false false]
+            Double/MAX_VALUE                  [false false false]
+            -1.0                              [false false false]
+            0.0                               [false false false]
+            1.0                               [false false false]
 
-            -1                                sut/neg-integer? true  sut/nat-integer? false sut/pos-integer? false
+            -1                                [true  false false]
 
-            0                                 sut/neg-integer? false sut/nat-integer? true  sut/pos-integer? false
+            0                                 [false true  false]
 
-            1                                 sut/neg-integer? false sut/nat-integer? true  sut/pos-integer? true
+            1                                 [false true  true]
 
-            (Integer. -1)                     sut/neg-integer? true  sut/nat-integer? false sut/pos-integer? false
-            (Long. -1)                        sut/neg-integer? true  sut/nat-integer? false sut/pos-integer? false
-            (clojure.lang.BigInt/fromLong -1) sut/neg-integer? true  sut/nat-integer? false sut/pos-integer? false
-            (BigInteger/valueOf -1)           sut/neg-integer? true  sut/nat-integer? false sut/pos-integer? false
-            (Short. "-1")                     sut/neg-integer? true  sut/nat-integer? false sut/pos-integer? false
-            (Long. -1)                        sut/neg-integer? true  sut/nat-integer? false sut/pos-integer? false
+            (Integer. -1)                     [true  false false]
+            (Long. -1)                        [true  false false]
+            (clojure.lang.BigInt/fromLong -1) [true  false false]
+            (BigInteger/valueOf -1)           [true  false false]
+            (Short. "-1")                     [true  false false]
+            (Long. -1)                        [true  false false]
 
-            (Integer. 0)                      sut/neg-integer? false sut/nat-integer? true  sut/pos-integer? false
-            (Long. 0)                         sut/neg-integer? false sut/nat-integer? true  sut/pos-integer? false
-            (clojure.lang.BigInt/fromLong 0)  sut/neg-integer? false sut/nat-integer? true  sut/pos-integer? false
-            (BigInteger/valueOf 0)            sut/neg-integer? false sut/nat-integer? true  sut/pos-integer? false
-            (Short. "0")                      sut/neg-integer? false sut/nat-integer? true  sut/pos-integer? false
-            (Long. 0)                         sut/neg-integer? false sut/nat-integer? true  sut/pos-integer? false
+            (Integer. 0)                      [false true  false]
+            (Long. 0)                         [false true  false]
+            (clojure.lang.BigInt/fromLong 0)  [false true  false]
+            (BigInteger/valueOf 0)            [false true  false]
+            (Short. "0")                      [false true  false]
+            (Long. 0)                         [false true  false]
 
-            (Integer. 1)                      sut/neg-integer? false sut/nat-integer? true  sut/pos-integer? true
-            (Long. 1)                         sut/neg-integer? false sut/nat-integer? true  sut/pos-integer? true
-            (clojure.lang.BigInt/fromLong 1)  sut/neg-integer? false sut/nat-integer? true  sut/pos-integer? true
-            (BigInteger/valueOf 1)            sut/neg-integer? false sut/nat-integer? true  sut/pos-integer? true
-            (Short. "1")                      sut/neg-integer? false sut/nat-integer? true  sut/pos-integer? true
-            (Long. 1)                         sut/neg-integer? false sut/nat-integer? true  sut/pos-integer? true)))
+            (Integer. 1)                      [false true  true]
+            (Long. 1)                         [false true  true]
+            (clojure.lang.BigInt/fromLong 1)  [false true  true]
+            (BigInteger/valueOf 1)            [false true  true]
+            (Short. "1")                      [false true  true]
+            (Long. 1)                         [false true  true])))
 
 (deftest named?
   (are [x expectation] (= expectation
