@@ -16,6 +16,9 @@
     ["present"]       false
     (keyword "ns" "") false
     (symbol "ns" " ") false
+    "   "             false
+    (keyword "" "a")  true
+    (symbol "" "a")   true
     'ns/name          true
     :wat/name         true
     "wat/patat"       true
