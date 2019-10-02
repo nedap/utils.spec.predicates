@@ -4,7 +4,8 @@
    [nedap.utils.test.api :refer-macros [run-tests]]
    [unit.nedap.utils.spec.predicates]
    [unit.nedap.utils.spec.predicates.present-named]
-   [unit.nedap.utils.spec.predicates.present-string]))
+   [unit.nedap.utils.spec.predicates.present-string]
+   [unit.nedap.utils.spec.predicates.range]))
 
 (nodejs/enable-util-print!)
 
@@ -12,6 +13,7 @@
   (run-tests
    'unit.nedap.utils.spec.predicates
    'unit.nedap.utils.spec.predicates.present-named
-   'unit.nedap.utils.spec.predicates.present-string))
+   'unit.nedap.utils.spec.predicates.present-string
+   'unit.nedap.utils.spec.predicates.range))
 
 (set! *main-cli-fn* -main)
