@@ -14,6 +14,8 @@
        (BigInteger/valueOf 1)            true
        (Short. "1")                      true
        (Long. 1)                         true
+       (Double. 1.1)                     true
+       (Float. 1.1)                      true
        Long/MIN_VALUE                    true
        Long/MAX_VALUE                    true
        (inc (bigint Long/MAX_VALUE))     false

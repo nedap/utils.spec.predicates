@@ -3,7 +3,7 @@
    [nedap.speced.def :as speced]))
 
 (speced/defn ^boolean? long?
-  "Is `x` an integer in the range of `java.lang.Long`?
+  "Is `x` a number in the range of `java.lang.Long`?
 
   Works for any numeric type"
   [^number? x]
