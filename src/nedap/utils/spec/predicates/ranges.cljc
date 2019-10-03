@@ -1,10 +1,8 @@
 (ns nedap.utils.spec.predicates.ranges
   (:require
+   #?(:clj [nedap.utils.spec.predicates.ranges.impl :refer :all])
    [nedap.speced.def :as speced])
-  #?(:cljs (:require-macros [nedap.utils.spec.predicates.ranges :refer [min-long-value max-long-value]])))
-
-#?(:clj (defmacro ^:private min-long-value [] Long/MIN_VALUE))
-#?(:clj (defmacro ^:private max-long-value [] Long/MAX_VALUE))
+  #?(:cljs (:require-macros [nedap.utils.spec.predicates.ranges.impl :refer [min-long-value max-long-value]])))
 
 (speced/defn ^boolean? long?
   "Is `x` a number in the range of `java.lang.Long`?
