@@ -28,9 +28,8 @@
   (<= (min-long-value) x -1))
 
 (speced/defn ^boolean? nat-long?
-  "Is `x` a non-negative fixed precision integer in the range of `java.lang.Long`?
+  "Is `x` a non-negative number in the range of `java.lang.Long`?
 
   Works for any numeric type"
   [^number? x]
-  (and (integer? x)
-       (pos-long? x)))
+  (<= 0 x (max-long-value)))
