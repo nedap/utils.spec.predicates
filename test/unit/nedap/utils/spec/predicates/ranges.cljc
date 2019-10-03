@@ -24,14 +24,14 @@
 
     (double 1.1)  sut/long? true  sut/nat-long? true  sut/pos-long? true  sut/neg-long? false
     (float 1.1)   sut/long? true  sut/nat-long? true  sut/pos-long? true  sut/neg-long? false
-    (long 1N)     sut/long? true  sut/nat-long? true  sut/pos-long? true  sut/neg-long? false
+    (long 1)      sut/long? true  sut/nat-long? true  sut/pos-long? true  sut/neg-long? false
     (short 1)     sut/long? true  sut/nat-long? true  sut/pos-long? true  sut/neg-long? false
     (int 1)       sut/long? true  sut/nat-long? true  sut/pos-long? true  sut/neg-long? false
     94e18         sut/long? false sut/nat-long? false sut/pos-long? false sut/neg-long? false
 
     (double -1.1) sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? true
     (float -1.1)  sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? true
-    (long -1N)    sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? true
+    (long -1)     sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? true
     (short -1)    sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? true
     (int -1)      sut/long? true  sut/nat-long? false sut/pos-long? false sut/neg-long? true
     -94e18        sut/long? false sut/nat-long? false sut/pos-long? false sut/neg-long? false)
