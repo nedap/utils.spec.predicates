@@ -2,6 +2,7 @@
   (:require
    [cljs.nodejs :as nodejs]
    [nedap.utils.test.api :refer-macros [run-tests]]
+   [unit.nedap.utils.spec.generators]
    [unit.nedap.utils.spec.predicates]
    [unit.nedap.utils.spec.predicates.present-named]
    [unit.nedap.utils.spec.predicates.present-string]))
@@ -10,6 +11,7 @@
 
 (defn -main []
   (run-tests
+   'unit.nedap.utils.spec.generators
    'unit.nedap.utils.spec.predicates
    'unit.nedap.utils.spec.predicates.present-named
    'unit.nedap.utils.spec.predicates.present-string))
