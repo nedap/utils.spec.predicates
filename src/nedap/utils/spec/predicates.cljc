@@ -5,7 +5,8 @@
    [clojure.string :as string]
    [nedap.speced.def :as speced]
    [nedap.utils.spec.predicates.impl :as impl]
-   [spec-coerce.core :as spec-coerce]))
+   [spec-coerce.core :as spec-coerce])
+  #?(:clj (:import (java.time LocalDate LocalDateTime Instant ZonedDateTime OffsetDateTime Duration OffsetTime LocalTime ZoneId))))
 
 (speced/defn ^boolean? neg-integer?
   "Is `x` negative (as per `clojure.core/neg?`) and integer (as per `clojure.core/integer?`)?
@@ -50,6 +51,35 @@
   (and (named? x)
        (present-string? (name x))))
 
+#?(:clj
+   (do
+     (defn duration? [v]
+       (instance? Duration v))
+
+     (defn instant? [v]
+       (instance? Instant v))
+
+     (defn local-date? [v]
+       (instance? LocalDate v))
+
+     (defn local-date-time? [v]
+       (instance? LocalDateTime v))
+
+     (defn local-time? [v]
+       (instance? LocalTime v))
+
+     (defn offset-date-time? [v]
+       (instance? OffsetDateTime v))
+
+     (defn offset-time? [v]
+       (instance? OffsetTime v))
+
+     (defn zoned-date-time? [v]
+       (instance? ZonedDateTime v))
+
+     (defn zone-id? [v]
+       (instance? ZoneId v))))
+
 (def neg-integer-coercer (impl/coercer neg-integer?))
 
 (def nat-integer-coercer (impl/coercer nat-integer?))
@@ -88,3 +118,62 @@
   (-> present-named?
       (spec/with-gen #(gen/such-that (comp present-string? name)
                                      (spec/gen ::named)))))
+
+#?(:clj
+   (do
+     (spec/def ::duration
+       (-> duration?
+           (spec/with-gen (fn [] (gen/fmap #(Duration/ofMillis %)
+                                           (gen/large-integer))))))
+
+     (spec/def ::instant
+       (-> instant?
+           (spec/with-gen (fn [] (gen/fmap #(Instant/ofEpochMilli %)
+                                           (gen/large-integer))))))
+
+     (spec/def ::zone-id
+       (-> zone-id?
+           (spec/with-gen (fn [] (gen/fmap #(ZoneId/of %)
+                                           (gen/elements (ZoneId/getAvailableZoneIds)))))))
+
+     (spec/def ::local-date
+       (-> local-date?
+           (spec/with-gen #(gen/fmap (fn [[millis zone]] (-> (Instant/ofEpochMilli millis)
+                                                             (.atZone zone)
+                                                             (.toLocalDate)))
+                                     (gen/tuple (gen/large-integer) (spec/gen ::zone-id))))))
+
+     (spec/def ::local-time
+       (-> local-time?
+           (spec/with-gen #(gen/fmap (fn [[millis zone]] (-> (Instant/ofEpochMilli millis)
+                                                             (.atZone zone)
+                                                             (.toLocalTime)))
+                                     (gen/tuple (gen/large-integer) (spec/gen ::zone-id))))))
+
+     (spec/def ::local-date-time
+       (-> local-date-time?
+           (spec/with-gen #(gen/fmap (fn [[millis zone]] (-> (Instant/ofEpochMilli millis)
+                                                             (.atZone zone)
+                                                             (.toLocalDateTime)))
+                                     (gen/tuple (gen/large-integer) (spec/gen ::zone-id))))))
+
+     (spec/def ::offset-date-time
+       (-> offset-date-time?
+           (spec/with-gen #(gen/fmap (fn [[millis zone]] (-> (Instant/ofEpochMilli millis)
+                                                             (.atZone zone)
+                                                             (.toOffsetDateTime)))
+                                     (gen/tuple (gen/large-integer) (spec/gen ::zone-id))))))
+
+     (spec/def ::offset-time
+       (-> offset-time?
+           (spec/with-gen #(gen/fmap (fn [[millis zone]] (-> (Instant/ofEpochMilli millis)
+                                                             (.atZone zone)
+                                                             (.toOffsetDateTime)
+                                                             (.toOffsetTime)))
+                                     (gen/tuple (gen/large-integer) (spec/gen ::zone-id))))))
+
+     (spec/def ::zoned-date-time
+       (-> zoned-date-time?
+           (spec/with-gen #(gen/fmap (fn [[millis zone]] (-> (Instant/ofEpochMilli millis)
+                                                             (.atZone zone)))
+                                     (gen/tuple (gen/large-integer) (spec/gen ::zone-id))))))))
