@@ -12,13 +12,13 @@ Selected, generic predicates that you might find handy when specing things.
 
 Please browse the public namespaces, which are documented, speced and tested.
 
-`nedap.utils.spec.predicates.specs` contains generator-equipped specs alternatives:
+Generator-equipped specs are available from the main namespace:
 ```clojure
-(require '[nedap.utils.spec.predicates.specs :as specs]
+(require '[nedap.utils.spec.predicates.predicates :as predicates]
          '[clojure.spec.alpha :as spec]
          '[clojure.spec.gen.alpha :as gen])
 => nil
-(gen/sample (spec/gen ::specs/pos-integer?))
+(gen/sample (spec/gen ::predicates/pos-integer?))
 => (3 1 12 3 1 6 58 4 107 2)
 ```
 

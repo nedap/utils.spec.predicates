@@ -1,6 +1,8 @@
 (ns unit.nedap.utils.spec.predicates
   (:require
+   #?(:clj [clojure.spec.gen.alpha :as gen] :cljs [cljs.spec.gen.alpha :as gen])
    #?(:clj [clojure.spec.alpha :as spec] :cljs [cljs.spec.alpha :as spec])
+   #?(:cljs [clojure.test.check.generators])
    #?(:clj [clojure.test :refer [deftest testing are is use-fixtures]] :cljs [cljs.test :refer-macros [deftest testing is are] :refer [use-fixtures]])
    [nedap.utils.spec.predicates :as sut]
    [spec-coerce.core :as spec-coerce]))
@@ -159,3 +161,12 @@
               "11111111111111111111111111111111"  ::pos-integer? BigInteger
               (-> Long/MAX_VALUE str)             ::pos-integer? Long
               (-> Long/MAX_VALUE inc' str)        ::pos-integer? BigInteger))))
+
+(deftest generate-all-predicates
+  (are [pred] (every? #(spec/valid? pred %) (gen/sample (spec/gen pred)))
+    ::sut/pos-integer
+    ::sut/neg-integer
+    ::sut/nat-integer
+    ::sut/named
+    ::sut/present-named
+    ::sut/present-string))
