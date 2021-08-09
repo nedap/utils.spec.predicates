@@ -28,7 +28,6 @@
       (spec/with-gen #(gen/such-that (comp predicates/present-string? name)
                                      (spec/gen ::named?)))))
 
-
 (spec/def ::present-string?
   (-> predicates/present-named?
       (spec/with-gen #(gen/such-that predicates/present-string? (gen/string)))))
