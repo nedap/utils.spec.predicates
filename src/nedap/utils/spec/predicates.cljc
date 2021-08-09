@@ -1,5 +1,7 @@
 (ns nedap.utils.spec.predicates
   (:require
+   [clojure.spec.alpha :as spec]
+   [clojure.spec.gen.alpha :as gen]
    [clojure.string :as string]
    [nedap.speced.def :as speced]
    [nedap.utils.spec.predicates.impl :as impl]
@@ -59,3 +61,30 @@
 (defmethod spec-coerce/sym->coercer `nat-integer? [_] nat-integer-coercer)
 
 (defmethod spec-coerce/sym->coercer `pos-integer? [_] pos-integer-coercer)
+
+(spec/def ::neg-integer
+  (-> neg-integer?
+      (spec/with-gen #(gen/large-integer* {:max 0}))))
+
+(spec/def ::nat-integer
+  (-> nat-integer?
+      (spec/with-gen #(gen/large-integer* {:min 0}))))
+
+(spec/def ::pos-integer
+  (-> pos-integer?
+      (spec/with-gen #(gen/large-integer* {:min 1}))))
+
+(spec/def ::named
+  (-> named?
+      (spec/with-gen #(gen/one-of [(gen/string)
+                                   (gen/symbol)
+                                   (gen/keyword)]))))
+
+(spec/def ::present-string
+  (-> present-named?
+      (spec/with-gen #(gen/such-that present-string? (gen/string)))))
+
+(spec/def ::present-named
+  (-> present-named?
+      (spec/with-gen #(gen/such-that (comp present-string? name)
+                                     (spec/gen ::named)))))

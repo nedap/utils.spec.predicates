@@ -66,7 +66,6 @@
                                        [medley "1.2.0"]
                                        [org.clojure/core.async "0.5.527"]
                                        [org.clojure/math.combinatorics "0.1.1"]
-                                       [org.clojure/test.check "0.10.0-alpha3"]
                                        [org.clojure/tools.namespace "0.3.1"]]
                         :plugins      [[lein-cloverage "1.1.1"]]
                         :source-paths ["dev"]
@@ -76,6 +75,7 @@
                                         :exclusions [com.cognitect/transit-clj
                                                      com.google.code.findbugs/jsr305
                                                      com.google.errorprone/error_prone_annotations]]
+                                       [org.clojure/test.check "1.1.0"]
                                        [com.cognitect/transit-clj "0.8.313" #_"transitive"]
                                        [com.google.errorprone/error_prone_annotations "2.1.3" #_"transitive"]
                                        [com.google.code.findbugs/jsr305 "3.0.2" #_"transitive"]]}

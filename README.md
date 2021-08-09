@@ -12,6 +12,16 @@ Selected, generic predicates that you might find handy when specing things.
 
 Please browse the public namespaces, which are documented, speced and tested.
 
+Generator-equipped specs are available from the main namespace:
+```clojure
+(require '[nedap.utils.spec.predicates.predicates :as predicates]
+         '[clojure.spec.alpha :as spec]
+         '[clojure.spec.gen.alpha :as gen])
+=> nil
+(gen/sample (spec/gen ::predicates/pos-integer))
+=> (3 1 12 3 1 6 58 4 107 2)
+```
+
 ## Development
 
 The default namespace is `dev`. Under it, `(refresh)` is available, which should give you a basic "Reloaded workflow".
