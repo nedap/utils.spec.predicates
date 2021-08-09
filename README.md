@@ -18,7 +18,7 @@ Generator-equipped specs are available from the main namespace:
          '[clojure.spec.alpha :as spec]
          '[clojure.spec.gen.alpha :as gen])
 => nil
-(gen/sample (spec/gen ::predicates/pos-integer?))
+(gen/sample (spec/gen ::predicates/pos-integer))
 => (3 1 12 3 1 6 58 4 107 2)
 ```
 
