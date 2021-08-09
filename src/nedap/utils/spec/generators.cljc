@@ -13,9 +13,9 @@
                       (gen/symbol)
                       (gen/keyword)])]
       (merge gen-builtins
-             {neg-integer?    (gen/such-that neg? (gen/large-integer {:max 0}))
-              nat-integer?    (gen/such-that (complement neg?) (gen/large-integer {:min 0}))
-              pos-integer?    (gen/such-that pos? (gen/large-integer {:min 1}))
+             {neg-integer?    (gen/large-integer* {:max 0})
+              nat-integer?    (gen/large-integer* {:min 0})
+              pos-integer?    (gen/large-integer* {:min 1})
               present-named?  (gen/such-that (comp present-string? name) gen-named)
               named?          gen-named
               present-string? (gen/such-that present-string? (gen/string))}))))
