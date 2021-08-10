@@ -1,5 +1,5 @@
 ;; Please don't bump the library version by hand - use ci.release-workflow instead.
-(defproject com.nedap.staffing-solutions/utils.spec.predicates "1.2.0-alpha1"
+(defproject com.nedap.staffing-solutions/utils.spec.predicates "1.2.0-alpha2"
   ;; Please keep the dependencies sorted a-z.
   :dependencies [[com.nedap.staffing-solutions/speced.def "1.1.1"]
                  [org.clojure/clojure "1.10.1"]]
