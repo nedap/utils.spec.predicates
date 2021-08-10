@@ -123,7 +123,7 @@
    (do
      (spec/def ::duration
        (-> duration?
-           (spec/with-gen (fn [] (gen/fmap #(Duration/ofMillis %)
+           (spec/with-gen (fn [] (gen/fmap #(Duration/ofSeconds %)
                                            (gen/large-integer))))))
 
      (spec/def ::instant
