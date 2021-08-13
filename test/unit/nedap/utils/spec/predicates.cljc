@@ -169,4 +169,14 @@
     ::sut/nat-integer
     ::sut/named
     ::sut/present-named
-    ::sut/present-string))
+    ::sut/present-string
+
+    #?@(:clj
+        [::sut/instant
+         ::sut/duration
+         ::sut/local-date
+         ::sut/local-date-time
+         ::sut/offset-time
+         ::sut/offset-date-time
+         ::sut/zoned-date-time
+         ::sut/zone-id])))
