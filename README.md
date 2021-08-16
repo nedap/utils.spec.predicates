@@ -5,7 +5,7 @@ Selected, generic predicates that you might find handy when specing things.
 ## Installation
 
 ```clojure
-[com.nedap.staffing-solutions/utils.spec.predicates "1.2.0-alpha2"]
+[com.nedap.staffing-solutions/utils.spec.predicates "1.2.0"]
 ```
 
 ## Documentation
