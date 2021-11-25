@@ -1,5 +1,5 @@
 ;; Please don't bump the library version by hand - use ci.release-workflow instead.
-(defproject com.nedap.staffing-solutions/utils.spec.predicates "1.2.0"
+(defproject com.nedap.staffing-solutions/utils.spec.predicates "1.2.1-alpha1"
   ;; Please keep the dependencies sorted a-z.
   :dependencies [[com.nedap.staffing-solutions/speced.def "1.1.1"]
                  [org.clojure/clojure "1.10.1"]]
@@ -86,7 +86,7 @@
                           :test-paths     ^:replace []
                           :resource-paths ^:replace []
                           :plugins        ^:replace []
-                          :dependencies   ^:replace [[com.nedap.staffing-solutions/ci.release-workflow "1.13.1"]]}
+                          :dependencies   ^:replace [[com.nedap.staffing-solutions/ci.release-workflow "1.14.1"]]}
 
              :ci       {:pedantic?    :abort
                         :jvm-opts     ["-Dclojure.main.report=stderr"]}})
