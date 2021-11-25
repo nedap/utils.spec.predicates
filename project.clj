@@ -19,6 +19,10 @@
                            :username "github"
                            :password :env/github_token}}
 
+  :deploy-repositories {"clojars" {:url      "https://clojars.org/repo"
+                                   :username :env/clojars_user
+                                   :password :env/clojars_pass}}
+
   :target-path "target/%s"
 
   :test-paths ["src" "test"]
