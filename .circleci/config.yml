@@ -57,7 +57,7 @@ jobs:
           command: lein with-profile -dev,+ci,+ncrw run -m nedap.ci.release-workflow.api sanity-check
       - run:
           name: release to Clojars
-          command: lein deploy clojars          
+          command: lein deploy clojars
 
 workflows:
   version: 2
@@ -72,6 +72,7 @@ workflows:
       - deploy:
           context:
             - Clojars
+            - Github
             - GPG
           requires:
             - build
