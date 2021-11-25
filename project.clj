@@ -1,5 +1,5 @@
 ;; Please don't bump the library version by hand - use ci.release-workflow instead.
-(defproject com.nedap.staffing-solutions/utils.spec.predicates "1.2.0"
+(defproject com.nedap.staffing-solutions/utils.spec.predicates "1.2.1-alpha3"
   ;; Please keep the dependencies sorted a-z.
   :dependencies [[com.nedap.staffing-solutions/speced.def "1.1.1"]
                  [org.clojure/clojure "1.10.1"]]
@@ -15,17 +15,13 @@
 
   :signing {:gpg-key "releases-staffingsolutions@nedap.com"}
 
-  :repositories {"releases" {:url      "https://nedap.jfrog.io/nedap/staffing-solutions/"
-                             :username :env/artifactory_user
-                             :password :env/artifactory_pass}}
+  :repositories {"github" {:url      "https://maven.pkg.github.com/nedap/*"
+                           :username "github"
+                           :password :env/github_token}}
 
   :deploy-repositories {"clojars" {:url      "https://clojars.org/repo"
                                    :username :env/clojars_user
                                    :password :env/clojars_pass}}
-
-  :repository-auth {#"https://nedap.jfrog\.io/nedap/staffing-solutions/"
-                    {:username :env/artifactory_user
-                     :password :env/artifactory_pass}}
 
   :target-path "target/%s"
 
@@ -94,7 +90,7 @@
                           :test-paths     ^:replace []
                           :resource-paths ^:replace []
                           :plugins        ^:replace []
-                          :dependencies   ^:replace [[com.nedap.staffing-solutions/ci.release-workflow "1.13.1"]]}
+                          :dependencies   ^:replace [[com.nedap.staffing-solutions/ci.release-workflow "1.14.1"]]}
 
              :ci       {:pedantic?    :abort
                         :jvm-opts     ["-Dclojure.main.report=stderr"]}})
