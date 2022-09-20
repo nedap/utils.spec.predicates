@@ -27,3 +27,11 @@
                                        x))
                                    (catch js/Error _
                                      x))))))
+
+(defmacro when-spec-coerce-available? [& body]
+  (when (try
+          (requiring-resolve 'spec-coerce.core/sym->coercer)
+          true
+          (catch Exception _
+            false))
+    `(do ~@body)))
