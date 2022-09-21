@@ -4,8 +4,8 @@
    [clojure.spec.gen.alpha :as gen]
    [clojure.string :as string]
    [nedap.speced.def :as speced]
-   [nedap.utils.spec.predicates.impl :as impl]
-   [spec-coerce.core :as spec-coerce])
+   [nedap.utils.spec.predicates.impl :as impl :refer [when-spec-coerce-available?]])
+  #?(:cljs (:require-macros [nedap.utils.spec.predicates.impl :refer [when-spec-coerce-available?]]))
   #?(:clj (:import (java.time LocalDate LocalDateTime Instant ZonedDateTime OffsetDateTime Duration OffsetTime LocalTime ZoneId))))
 
 (speced/defn ^boolean? neg-integer?
@@ -86,11 +86,12 @@
 
 (def pos-integer-coercer (impl/coercer pos-integer?))
 
-(defmethod spec-coerce/sym->coercer `neg-integer? [_] neg-integer-coercer)
+(when-spec-coerce-available?
+ (defmethod spec-coerce.core/sym->coercer `neg-integer? [_] neg-integer-coercer)
 
-(defmethod spec-coerce/sym->coercer `nat-integer? [_] nat-integer-coercer)
+ (defmethod spec-coerce.core/sym->coercer `nat-integer? [_] nat-integer-coercer)
 
-(defmethod spec-coerce/sym->coercer `pos-integer? [_] pos-integer-coercer)
+ (defmethod spec-coerce.core/sym->coercer `pos-integer? [_] pos-integer-coercer))
 
 (spec/def ::neg-integer
   (-> neg-integer?
